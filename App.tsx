@@ -7,6 +7,8 @@ import {
   Poppins_700Bold,
 } from '@expo-google-fonts/poppins'
 import { Router } from '@routes/Router'
+import { ThemeProvider } from 'styled-components/native'
+import theme from '@utils/theme'
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false)
@@ -33,5 +35,9 @@ export default function App() {
     return null
   }
 
-  return <Router />
+  return (
+    <ThemeProvider theme={theme}>
+      <Router />
+    </ThemeProvider>
+  )
 }
