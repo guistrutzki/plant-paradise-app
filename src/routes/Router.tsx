@@ -7,7 +7,7 @@ import { AuthRoutes } from './Auth.routes'
 const MainNavigator = createNativeStackNavigator()
 
 export const Router = () => {
-  const isAuth = false
+  const isAuth = true
 
   return (
     <NavigationContainer>
