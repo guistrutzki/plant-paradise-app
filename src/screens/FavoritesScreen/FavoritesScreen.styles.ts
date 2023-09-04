@@ -6,5 +6,5 @@ export const Container = styled.View`
 `
 
 export const HeaderWrapper = styled.View`
-  padding: 36px 0 24px;
+  padding: 0 0 24px;
 `

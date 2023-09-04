@@ -10,14 +10,15 @@ export const Container = styled.View`
   position: relative;
   flex-direction: row;
   border-radius: 8px;
-  width: 300px;
+  width: 330px;
   margin-right: 16px;
-  overflow: hidden;
 `
 
 export const PlantImage = styled.Image`
   width: 50%;
   height: 100%;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 `
 
 export const ContentWrapper = styled.View`
