@@ -32,3 +32,10 @@ export const PopularPlantsWrapper = styled.View`
 export const PlantListWrapper = styled.View`
   margin-top: 24px;
 `
+
+export const LoadingWrapper = styled.View`
+  align-items: center;
+  justify-content: center;
+  width: ${deviceWidth - 48}px;
+  height: 200px
+`

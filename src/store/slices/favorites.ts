@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { useAppSelector } from "..";
+import { useAppSelector } from "../index";
 
 const favoritesSlice = createSlice({
   name: 'favorites',

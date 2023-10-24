@@ -26,6 +26,7 @@ export const CategoryTab = ({
     <S.Container {...rest}>
       {categories.map(eachCategory => (
         <S.CategoryPressable
+          key={eachCategory}
           onPress={() => handleOnCategoryPress(eachCategory)}>
           <Typography
             fontWeight="$medium"

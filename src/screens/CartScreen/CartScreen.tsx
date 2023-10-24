@@ -1,4 +1,4 @@
-import { useAppSelector } from '@store/index'
+// import { useAppSelector } from '@store/index'
 import * as S from './CartScreen.styles'
 
 export const CartScreen = () => {
