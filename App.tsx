@@ -12,6 +12,8 @@ import { ThemeProvider } from 'styled-components/native'
 import theme from '@utils/theme'
 import { store } from '@store/index'
 import { AppContext } from '@contexts/AppContext'
+import { QueryClientProvider } from 'react-query'
+import queryClient from '@services/queryClient'
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false)
@@ -39,12 +41,14 @@ export default function App() {
   }
 
   return (
-    <AppContext>
-      <ReduxProvider store={store}>
-        <ThemeProvider theme={theme}>
-          <Router />
-        </ThemeProvider>
-      </ReduxProvider>
-    </AppContext>
+    <QueryClientProvider client={queryClient}>
+      <AppContext>
+        <ReduxProvider store={store}>
+          <ThemeProvider theme={theme}>
+            <Router />
+          </ThemeProvider>
+        </ReduxProvider>
+      </AppContext>
+    </QueryClientProvider>
   )
 }

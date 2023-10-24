@@ -10,6 +10,7 @@ import { CategoryTab } from '@components/organisms/CategoryTab'
 import { usePlants } from '@contexts/PlantsContext'
 import { usePlantsStore } from '@store-zustand/usePlants'
 import { getAllPlants } from '@services/PlantService'
+import { useFetchPlants } from '@services/queries/useFetchPlants'
 // import { loadPlants, usePlants } from '@store/slices/plants'
 // import { useAppDispatch } from '@store/utils'
 
@@ -30,28 +31,31 @@ export const HomeScreen = () => {
   // }, [])
 
   //! Zustand
-  const items = usePlantsStore(state => state.items)
-  const mostPopular = usePlantsStore(state => state.mostPopular)
-  const isLoading = usePlantsStore(state => state.isLoading)
+  // const items = usePlantsStore(state => state.items)
+  // const mostPopular = usePlantsStore(state => state.mostPopular)
+  // const isLoading = usePlantsStore(state => state.isLoading)
 
-  const setData = usePlantsStore(state => state.setData)
-  const setIsLoading = usePlantsStore(state => state.setIsLoading)
+  // const setData = usePlantsStore(state => state.setData)
+  // const setIsLoading = usePlantsStore(state => state.setIsLoading)
 
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const response = await getAllPlants()
-        const { items, mostPopular } = response.body.data
-        setData(items, mostPopular)
-      } catch (err) {
-        console.log(err)
-      } finally {
-        setIsLoading(false)
-      }
-    }
+  // useEffect(() => {
+  //   const init = async () => {
+  //     try {
+  //       const response = await getAllPlants()
+  //       const { items, mostPopular } = response.body.data
+  //       setData(items, mostPopular)
+  //     } catch (err) {
+  //       console.log(err)
+  //     } finally {
+  //       setIsLoading(false)
+  //     }
+  //   }
 
-    void init()
-  }, [])
+  //   void init()
+  // }, [])
+
+  //! React Query
+  const { data, isLoading } = useFetchPlants()
 
   return (
     <S.Container>
@@ -80,7 +84,8 @@ export const HomeScreen = () => {
             <FlatList
               contentContainerStyle={{ paddingVertical: 16, paddingLeft: 24 }}
               horizontal
-              data={mostPopular}
+              // data={mostPopular}
+              data={data?.body.data.mostPopular}
               showsHorizontalScrollIndicator={false}
               renderItem={() => <PopularPlantCard />}
               ListEmptyComponent={
@@ -99,7 +104,8 @@ export const HomeScreen = () => {
             />
           </S.PopularPlantsWrapper>
         )}
-        data={items}
+        // data={items}
+        data={data?.body.data.items}
         contentContainerStyle={{ padding: 16, paddingHorizontal: 24 }}
         renderItem={() => <PlantCard />}
         ListEmptyComponent={
