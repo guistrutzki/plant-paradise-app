@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Provider as ReduxProvider } from 'react-redux'
 import * as Font from 'expo-font'
 
 import {
@@ -9,6 +10,7 @@ import {
 import { Router } from '@routes/Router'
 import { ThemeProvider } from 'styled-components/native'
 import theme from '@utils/theme'
+import { store } from '@store/index'
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false)
@@ -36,8 +38,10 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Router />
-    </ThemeProvider>
+    <ReduxProvider store={store}>
+      <ThemeProvider theme={theme}>
+        <Router />
+      </ThemeProvider>
+    </ReduxProvider>
   )
 }

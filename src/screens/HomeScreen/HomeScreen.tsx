@@ -6,10 +6,17 @@ import * as S from './HomeScreen.styles'
 import { PopularPlantCard } from '@components/molecules/PopularPlantCard'
 import { PlantCard } from '@components/molecules/PlantCard'
 import { CategoryTab } from '@components/organisms/CategoryTab'
+import { loadPlants, usePlants } from '@store/slices/plants'
+import { useEffect } from 'react'
+import { useAppDispatch } from '@store/index'
 
 export const HomeScreen = () => {
-  const popularPlantsData = [1, 2, 3]
-  const plantsData = [1, 2, 3, 4, 5]
+  const dispatch = useAppDispatch()
+  const { items, mostPopular } = usePlants()
+
+  useEffect(() => {
+    dispatch(loadPlants())
+  }, [])
 
   return (
     <S.Container>
@@ -38,7 +45,7 @@ export const HomeScreen = () => {
             <FlatList
               contentContainerStyle={{ paddingVertical: 16, paddingLeft: 24 }}
               horizontal
-              data={popularPlantsData}
+              data={[]}
               showsHorizontalScrollIndicator={false}
               renderItem={() => <PopularPlantCard />}
             />
@@ -52,7 +59,7 @@ export const HomeScreen = () => {
             />
           </S.PopularPlantsWrapper>
         )}
-        data={plantsData}
+        data={[]}
         contentContainerStyle={{ padding: 16, paddingHorizontal: 24 }}
         renderItem={() => <PlantCard />}
         showsVerticalScrollIndicator={false}
