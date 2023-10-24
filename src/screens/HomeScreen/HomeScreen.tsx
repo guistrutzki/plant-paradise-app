@@ -7,15 +7,50 @@ import * as S from './HomeScreen.styles'
 import { PopularPlantCard } from '@components/molecules/PopularPlantCard'
 import { PlantCard } from '@components/molecules/PlantCard'
 import { CategoryTab } from '@components/organisms/CategoryTab'
-import { loadPlants, usePlants } from '@store/slices/plants'
-import { useAppDispatch } from '@store/utils'
+import { usePlants } from '@contexts/PlantsContext'
+import { usePlantsStore } from '@store-zustand/usePlants'
+import { getAllPlants } from '@services/PlantService'
+// import { loadPlants, usePlants } from '@store/slices/plants'
+// import { useAppDispatch } from '@store/utils'
 
 export const HomeScreen = () => {
-  const dispatch = useAppDispatch()
-  const { items, mostPopular, isLoading } = usePlants()
+  //! Redux
+  // const dispatch = useAppDispatch()
+  // const { items, mostPopular, isLoading } = usePlants()
+
+  // useEffect(() => {
+  //   dispatch(loadPlants())
+  // }, [])
+
+  //! Context API
+  // const { fetchPlants, isLoading, items, mostPopular } = usePlants()
+
+  // useEffect(() => {
+  //   void fetchPlants()
+  // }, [])
+
+  //! Zustand
+  const items = usePlantsStore(state => state.items)
+  const mostPopular = usePlantsStore(state => state.mostPopular)
+  const isLoading = usePlantsStore(state => state.isLoading)
+
+  const setData = usePlantsStore(state => state.setData)
+  const setIsLoading = usePlantsStore(state => state.setIsLoading)
 
   useEffect(() => {
-    dispatch(loadPlants())
+    const init = async () => {
+      try {
+        const response = await getAllPlants()
+        const { items, mostPopular } = response.body.data
+        setData(items, mostPopular)
+      } catch (err) {
+        console.log(err)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    void init()
   }, [])
 
   return (

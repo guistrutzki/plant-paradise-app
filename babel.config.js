@@ -16,6 +16,8 @@ module.exports = function(api) {
             '@routes': './src/routes',
             '@store': './src/store',
             '@services': './src/services',
+            '@contexts': './src/contexts',
+            '@store-zustand': './src/store-zustand',
           },
         },
       ]
